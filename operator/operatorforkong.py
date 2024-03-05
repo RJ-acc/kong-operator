@@ -40,7 +40,7 @@ spec:
   rules:
   - http:
       paths:
-      - path: /r1-productcatalogmanagement/tmf-api/productCatalogManagement/v4
+      - path: /{service_prefix}--productcatalogmanagement/tmf-api/productCatalogManagement/v4
         pathType: Prefix
         backend:
           service:
@@ -68,8 +68,10 @@ def scan_existing_services(logger, **kwargs):
                     create_ingress_for_service(svc.metadata.name, istio_service_name, istio_service_port, logger)
 
 def create_ingress_for_service(service_name, istio_service_name, istio_service_port, logger):
+    service_prefix = service_name.split('-')[0]  # Assuming the service name format is 'prefix-restoftheservicename'
     ingress_body = yaml.safe_load(ingress_template.format(
         name=service_name,
+        service_prefix=service_prefix, 
         istio_service_name=istio_service_name,
         istio_service_port=istio_service_port))
     api.create_namespaced_ingress(namespace="istio-ingress", body=ingress_body)
