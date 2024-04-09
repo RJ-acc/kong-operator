@@ -13,3 +13,43 @@ config:
   - exp
   key_claim_name: iss
   secret_is_base64: false
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: kongcanvasuser
+  namespace: istio-ingress
+  labels:
+    konghq.com/credential: jwt 
+stringData:
+  kongCredType: jwt 
+  algorithm: RS256
+  key: "http://34.91.105.207:8083/auth/realms/master"
+  rsa_public_key: |-
+    -----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuwX1Hx9ndEkfjJ056z/qNXYjNpQ4dIZidfXqj09hbiGgAPmdevvq6aIe6e9BRvsHNNoOK/+eaLeNY8x3YkWf6K2LuyEPA2TRth4U19MSca8iURFlJMgE4Y4lZge7T6F1sdVfQWUj9x0aFWM+3JluOKIBSAsAhQO3A5M6aEh1Qd8wg2LXq0rOyN0GI2A+QgTKkbMUHo9+bqlodfvm3LOGCnOtlyozpIZ754mtyxrehKi3qrSgpNrBjdGLd35hiJle37ldh6XYVEplBcG+FgY2u+ige2YEykYUF648GHWK0VWgRCwsNM7JOfJJM0Ho5BAb8X8TguwpE57W3qymG9rVtwIDAQAB
+    -----END PUBLIC KEY-----
+  secret: xJcr8S3qOJmrRi9K8e8F75eLXD84hkL0
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongConsumer
+metadata:
+ name: kongcanvasuser3
+ namespace: istio-ingress
+ annotations:
+   kubernetes.io/ingress.class: kong
+username: kongcanvasuser
+credentials:
+- kongcanvasuser
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rate-limit-5-min
+  namespace: istio-ingress
+  annotations:
+    kubernetes.io/ingress.class: kong
+config:
+  minute: 5
+  policy: local
+plugin: rate-limiting
