@@ -1,1 +1,21 @@
-
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: response-ratelimiting-example
+  namespace: "istio-ingress"
+plugin: response-ratelimiting
+config:
+  limits:
+    limit_name:
+      minute: 10
+  policy: local
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: request-termination-example
+  namespace: "istio-ingress"
+plugin: request-termination
+config:
+  status_code: 403
+  message: So long and thanks for all the fish!
