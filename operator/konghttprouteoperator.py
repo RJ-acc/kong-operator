@@ -1,5 +1,3 @@
-# new working code
-
 import kopf
 import kubernetes.client
 import logging
@@ -7,6 +5,9 @@ import json
 from kubernetes.client.rest import ApiException
 from kubernetes.client.api import CustomObjectsApi
 import os
+import yaml
+import requests
+
 
 logging_level = os.environ.get('LOGGING',logging.INFO)
 print('Logging set to ',logging_level)
@@ -27,8 +28,8 @@ APIS_PLURAL = "exposedapis"
 httproute_uid = None
 
 group = "gateway.networking.k8s.io"  # API group for Gateway API
-version = "v1"  # Change this to the version you are using; it could be v1alpha1, v1alpha2, v1beta1, etc.
-plural = "httproutes"  # The plural name of the HTTPRoute resource
+version = "v1"  # Currently tested on v1 ,need to check with v1alpha1, v1alpha2, v1beta1, etc.
+plural = "httproutes"  # The plural name of the kong route CRD - HTTPRoute resource 
 
  
 
@@ -37,61 +38,63 @@ plural = "httproutes"  # The plural name of the HTTPRoute resource
 def manage_api_lifecycle(spec, name, namespace, status, meta, logger, **kwargs):
     httproute_created = create_or_update_ingress(spec, name, namespace, meta, logger)
     if not httproute_created:
-        logger.info("HTTPRoute creation/update failed. Skipping plugin management.")
+        logger.info("HTTPRoute creation/update failed. Skipping plugin/policy management.")
         return
 
     plugin_names = []
 
-
-    # Check if Rate Limit is enabled and manage it
+    # Check if Rate Limit is enabled 
     if spec.get('rateLimit', {}).get('enabled', False):
         ratelimit_plugin = manage_ratelimit(spec, name, namespace, meta, logger)
         if ratelimit_plugin:
             plugin_names.append(ratelimit_plugin)
 
-    # Check if API Key Verification is enabled and manage it
+    # Check if API Key Verification is enabled  
     if spec.get('apiKeyVerification', {}).get('enabled', False):
         apiauth_plugin = manage_apiauthentication(spec, name, namespace, meta, logger)
         if apiauth_plugin:
             plugin_names.append(apiauth_plugin)
 
-    # Check if CORS is enabled and manage it
+    # Check if CORS is enabled 
     if spec.get('CORS', {}).get('enabled', False):
         cors_plugin = manage_cors(spec, name, namespace, meta, logger)
         if cors_plugin:
             plugin_names.append(cors_plugin)
+    
+    # Manage plugins from URL if provided  in template and collect their names generated after applying in cluster
+    url_plugin_names = manage_plugins_from_url(spec, name, namespace, meta, logger)
+    plugin_names.extend(url_plugin_names)
 
-    # Update the HTTPRoute with new annotations if plugins were managed
+    # Update the HTTPRoute with annotations if any plugins were created or updated.
     if plugin_names:
         annotations = {'konghq.com/plugins': ','.join(plugin_names)}
-        update_httproute_annotations(name, namespace, annotations, logger)
+        updated = update_httproute_annotations(name, namespace, annotations, logger)
+        if updated:
+            logger.info(f"HTTPRoute '{name}' updated with plugins: {plugin_names}")
+        else:
+            logger.error("Failed to update HTTPRoute with annotations.")
 
 
 def create_or_update_ingress(spec, name, namespace, meta, logger, **kwargs):
     global httproute_uid
-    # Check if 'implementation' is 'ready'
+    # Check if 'implementation' is 'ready' this will be enabled once APIS_PLURAL = "exposedapis" will be used in components operator 
     """
     if not status.get('implementation', {}).get('ready', False):
         logger.info(f"Implementation not ready for '{name}'. Ingress creation or update skipped.")
         return
     """
-    # Initialize Kubernetes client
+    # Initialize Kubernetes  custom obecclient
     api_instance = kubernetes.client.CustomObjectsApi()
     
 
     # Construct Ingress name and path from VirtualService details
     #ingress_name = f"kong-to-istio-ingress-{meta['name']}"
     ingress_name = f"kong-api-route-{name}"
-    #namespace = "components"    , to make owner reference work 
     namespace = "istio-ingress" 
     service_name = "istio-ingress"
     service_namespace = "istio-ingress"
     strip_path = "false"
     kong_gateway_namespace = "istio-ingress"
-    #print(ingress_name)
-
-
-
 
 
     # Prepare ownerReference ,this will add owner refernece from exposedapis to http  route
@@ -397,9 +400,158 @@ def update_httproute_annotations(name, namespace, annotations, logger):
 
 
 
+def check_url(url):
+    """ Check if the URL is accessible. """
+    try:
+        response = requests.head(url)
+        response.raise_for_status()  # Will raise an HTTPError if the HTTP request returned an unsuccessful status code
+        return True
+    except requests.RequestException as e:
+        logger.error(f"Failed to reach the URL: {url}. Error: {e}")
+        return False
+
+def download_template(url):
+    """ Download and parse the YAML or JSON template from the URL. """
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        documents = yaml.safe_load_all(response.text)  # Handle multiple YAML documents
+        return list(documents)  # Convert generator to list if you need to process multiple documents
+    except requests.RequestException as e:
+        logger.error(f"Failed to download the template from: {url}. Error: {e}")
+        return None
 
 
 
+
+def apply_plugins_from_template(templates, namespace):
+    """ Apply the configurations from the template to the Kubernetes cluster. """
+    namespace = "istio-ingress"
+    plugin_names = []
+    api_instance = kubernetes.client.CustomObjectsApi()
+
+
+    for template in templates:
+        plugin_name = template['metadata']['name']
+        group, version = template['apiVersion'].split('/')
+        plural = 'kongplugins'  # Modify as necessary based on the resource type
+
+        try:
+            # Attempt to get the existing plugin
+            existing_plugin = api_instance.get_namespaced_custom_object(group=group, version=version, namespace=namespace, plural=plural, name=plugin_name)
+            resource_version = existing_plugin['metadata']['resourceVersion']
+            template['metadata']['resourceVersion'] = resource_version  # Needed to update the resource
+            response = api_instance.replace_namespaced_custom_object(group=group, version=version, namespace=namespace, plural=plural, name=plugin_name, body=template)
+            logger.info(f"Plugin '{plugin_name}' updated in namespace '{namespace}'.")
+        except ApiException as e:
+            if e.status == 404:
+                # If the plugin does not exist, create it
+                response = api_instance.create_namespaced_custom_object(group=group, version=version, namespace=namespace, plural=plural, body=template)
+                logger.info(f"Plugin '{plugin_name}' created in namespace '{namespace}'.")
+            else:
+                # Log other exceptions
+                logger.error(f"Failed to apply plugin '{plugin_name}': {e}")
+                continue  # Skip to next plugin
+
+        plugin_names.append(plugin_name)
+    return plugin_names
+
+
+def manage_plugins_from_url(spec, name, namespace, meta, logger):
+    """ Manages downloading and applying plugins from a URL specified in the CRD. """
+    plugin_names = []
+    template_url = spec.get('template')
+    if check_url(template_url):
+        templates = download_template(template_url)
+        if templates:
+            plugin_names.extend(apply_plugins_from_template(templates, namespace))
+            logger.info(f"Plugins applied from URL and their names collected: {plugin_names}")
+        else:
+            logger.info("Template download failed or was empty.")
+    else:
+        logger.info("Template URL is not reachable.")
+    return plugin_names
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+"""
+def fetch_template_from_url(url):
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        if url.endswith('.yaml') or url.endswith('.yml'):
+            # Process multiple documents in a single YAML file
+            documents = list(yaml.safe_load_all(response.text))
+            if documents:
+                return documents[0]  # Assuming you want to use the first document
+            else:
+                logger.error("No documents found in the YAML file.")
+                return None
+        else:
+            return response.json()
+    except requests.RequestException as e:
+        logger.error(f"Failed to fetch template from URL '{url}': {str(e)}")
+        return None
+    except yaml.YAMLError as ye:
+        logger.error(f"Failed to parse YAML from URL '{url}': {str(ye)}")
+        return None
+
+def fetch_template_from_k8s(name, namespace, api_instance):
+    try:
+        group = 'oda.tmforum.org'
+        version = 'v1beta3'
+        plural = 'kongplugins'  # Assuming the template resources are under this plural
+        template = api_instance.get_namespaced_custom_object(group=group, version=version, namespace=namespace, plural=plural, name=name)
+        return template.get('spec', {})
+    except ApiException as e:
+        logger.error(f"Failed to fetch template '{name}' from Kubernetes: {e}")
+        return None
+
+def apply_template_to_spec(spec, template_ref, namespace, api_instance):
+    if template_ref.startswith('http://') or template_ref.startswith('https://'):
+        template = fetch_template_from_url(template_ref)
+    else:
+        template = fetch_template_from_k8s(template_ref, namespace, api_instance)
+
+    if not template:
+        logger.error("Template is not found or invalid. Proceeding without template settings.")
+        return spec
+
+    # Ensure spec is mutable
+    modified_spec = dict(spec)  # Create a mutable copy if necessary
+
+    # Merge the template settings into the spec
+    for key, value in template.items():
+        if key not in modified_spec:
+            modified_spec[key] = value
+        elif isinstance(value, dict) and isinstance(modified_spec[key], dict):
+            modified_spec[key].update(value)
+
+    return modified_spec
+
+
+
+
+
+
+
+
+
+"""
 
 
 
