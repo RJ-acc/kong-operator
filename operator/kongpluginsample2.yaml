@@ -5,7 +5,7 @@ metadata:
   namespace: istio-ingress
 plugin: rate-limiting
 config:
-  minute: 5
+  minute: 10
   policy: local
 ---
 apiVersion: configuration.konghq.com/v1
@@ -17,5 +17,5 @@ plugin: response-ratelimiting
 config:
   limits:
     limit_name:
-      minute: 10
+      minute: 5
   policy: local
