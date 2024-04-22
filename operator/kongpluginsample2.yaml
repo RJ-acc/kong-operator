@@ -5,6 +5,6 @@ metadata:
   namespace: istio-ingress
 plugin: rate-limiting
 config:
-  minute: 10
+  minute: 1
   policy: local
 
