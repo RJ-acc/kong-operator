@@ -7,5 +7,5 @@ plugin: response-ratelimiting
 config:
   limits:
     limit_name:
-      minute: 100
+      minute: 200
   policy: local
