@@ -2,7 +2,6 @@ apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: rate-limiting-example
-  namespace: istio-ingress
 plugin: rate-limiting
 config:
   minute: 1
