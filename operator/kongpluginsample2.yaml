@@ -4,7 +4,7 @@ metadata:
   name: rate-limiting-example
 plugin: rate-limiting
 config:
-  minute: 15
+  minute: 150
   policy: local
 ---
 apiVersion: configuration.konghq.com/v1
