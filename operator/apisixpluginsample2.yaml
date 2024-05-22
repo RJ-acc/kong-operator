@@ -12,10 +12,4 @@ spec:
         burst: false
         nodelay: false
         key: "remote_addr"
-    - name: rate-limiting
-      enable: true
-      config:
-        rate: 1
-        burst: 0
-        key: "remote_addr"
-        rejected_code: 503
+
