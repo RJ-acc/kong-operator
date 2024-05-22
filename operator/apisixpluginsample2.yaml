@@ -9,7 +9,7 @@ spec:
       enable: true
       config:
         rate: 5
-        burst: false
+        burst: 0
         nodelay: false
         key: "remote_addr"
 
