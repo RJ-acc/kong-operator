@@ -10,7 +10,7 @@ spec:
       config:
         rate: 5
         burst: false
-        nodelay: true
+        nodelay: false
         key: "remote_addr"
     - name: rate-limiting
       enable: true
