@@ -8,7 +8,7 @@ spec:
     - name: limit-req
       enable: true
       config:
-        rate: 5
+        rate: 1
         burst: 0
         nodelay: false
         key: "remote_addr"
