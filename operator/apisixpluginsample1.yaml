@@ -17,9 +17,9 @@ spec:
       config:
         client_id: "apisixuser"
         client_secret: "BwrEvSvXXgwySx41g2ZSNnfW3KBlhC62"
-        discovery: "http://34.90.211.18:8083/auth/realms/myrealm/.well-known/openid-configuration"
+        discovery: "http://34.34.83.30:8083/auth/realms/myrealm/.well-known/openid-configuration"
         bearer_only: true
         realm: "myrealm"
-        introspection_endpoint: "http://34.90.211.18:8083/auth/realms/myrealm/protocol/openid-connect/token/introspect"
-        token_endpoint: "http://34.90.211.18:8083/auth/realms/myrealm/protocol/openid-connect/token"
+        introspection_endpoint: "http://34.34.83.30:8083/auth/realms/myrealm/protocol/openid-connect/token/introspect"
+        token_endpoint: "http://34.34.83.30:8083/auth/realms/myrealm/protocol/openid-connect/token"
         scope: "openid profile email"
