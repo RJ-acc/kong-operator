@@ -16,7 +16,7 @@ spec:
       enable: true
       config:
         client_id: "apisixuser"
-        client_secret: "BwrEvSvXXgwySx41g2ZSNnfW3KBlhC62"
+        client_secret: "U3POxm1ep17l2a5Nr090atVD9sWbfgny"
         discovery: "http://34.34.83.30:8083/auth/realms/myrealm/.well-known/openid-configuration"
         bearer_only: true
         realm: "myrealm"
