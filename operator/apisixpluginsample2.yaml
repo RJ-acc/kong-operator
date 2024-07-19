@@ -8,8 +8,18 @@ spec:
     - name: limit-req
       enable: true
       config:
-        rate: 1
+        rate: 5
         burst: 0
-        nodelay: false
+        nodelay: true
         key: "remote_addr"
-
+    - name: openid-connect
+      enable: false
+      config:
+        client_id: "apisixuser"
+        client_secret: "U3POxm1ep17l2a5Nr090atVD9sWbfgny"
+        discovery: "http://34.34.83.30:8083/auth/realms/myrealm/.well-known/openid-configuration"
+        bearer_only: true
+        realm: "myrealm"
+        introspection_endpoint: "http://34.34.83.30:8083/auth/realms/myrealm/protocol/openid-connect/token/introspect"
+        token_endpoint: "http://34.34.83.30:8083/auth/realms/myrealm/protocol/openid-connect/token"
+        scope: "openid profile email"
