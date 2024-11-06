@@ -16,6 +16,4 @@ spec:
       enable: true
       config:
           key: iss
-          public_key: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6Ek0PBsl2ToF8KITo9DC5WIDXAx7goqQuYWnoeeQuRNW7ql4fkXCSwH/s0ikif4tgazqJ+N/mFwNro+PPnq8uc3OWwzD+JX0vJivEnaDRoA9WYs+G2O347HLDIDXCtzLQfCf9SlB2EJhUpk+nDBQ9iNK4CO9wpimJB+nXtSNVWu8Fdw+EvHTNbxwfP+br1NOeWPLQwkoX2+glnE+x8PlqoucW15SFMwVbOyaDzgHQzjaxuE1uRDr44FqIAWlyDIXzY1hWgQPD3HWLCSVpzRcvMhKkyjmWlkQEXChvrVTzM9k9P1ldz0XBYoNbJ6yvSKe/BGJndAil0a9UGF4umqmyQIDAQAB\n-----END PUBLIC KEY-----"
-          algorithm: RS256
-          secret: AWqqxdwAq4m38ANq4AfQYE3qdh0bYuI1
+          value: "http://34.91.86.64:8083/auth/realms/myrealm
