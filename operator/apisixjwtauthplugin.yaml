@@ -16,6 +16,6 @@ spec:
       enable: true
       config:
           key: iss
-          public_key: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9v0alOlorEC2NZqyhkRBVrcXBLKzxcR8YhTVtVt2qRnR7L1sCG4lVSEN0F3fGxk5k7AKAs0YLR3TdOc2KAybWvotUngF0EyiDo+bhr2e3Ax8YzZVQh1wyPb0xYpnP1z/I8SEPazAvNoBOkaVbYyWF5fl82lo4JavUBa/T/Vo+kshD5RjXEWR5FIFUmqNd2Pc5IYC/YP8q/9orvyORdGt2WHBrBYpr5usfURU6hW5p51N3hUEeZF/AxHq1Og6wOnzcy56mHObXxI15nudDWlcbf+2neKqcOw5ZWyzbJ3nRCtk3XARuTmVrsZwI/dtgojY9fStNsQGxP1fkPbosHInxwIDAQAB\n-----END PUBLIC KEY-----"
+          public_key: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA6Ek0PBsl2ToF8KITo9DC5WIDXAx7goqQuYWnoeeQuRNW7ql4fkXCSwH/s0ikif4tgazqJ+N/mFwNro+PPnq8uc3OWwzD+JX0vJivEnaDRoA9WYs+G2O347HLDIDXCtzLQfCf9SlB2EJhUpk+nDBQ9iNK4CO9wpimJB+nXtSNVWu8Fdw+EvHTNbxwfP+br1NOeWPLQwkoX2+glnE+x8PlqoucW15SFMwVbOyaDzgHQzjaxuE1uRDr44FqIAWlyDIXzY1hWgQPD3HWLCSVpzRcvMhKkyjmWlkQEXChvrVTzM9k9P1ldz0XBYoNbJ6yvSKe/BGJndAil0a9UGF4umqmyQIDAQAB\n-----END PUBLIC KEY-----"
           algorithm: RS256
-          secret: z0XuGx2Duf5Jomzne6PUujwNyIPL2vBI
+          secret: AWqqxdwAq4m38ANq4AfQYE3qdh0bYuI1
