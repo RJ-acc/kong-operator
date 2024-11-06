@@ -15,5 +15,5 @@ spec:
     - name: jwt-auth
       enable: true
       config:
-          key: iss
-          value: "http://34.91.86.64:8083/auth/realms/myrealm"
+        consumer_by:
+          - iss
