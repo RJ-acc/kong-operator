@@ -16,4 +16,4 @@ spec:
       enable: true
       config:
           key: iss
-          value: "http://34.91.86.64:8083/auth/realms/myrealm
+          value: "http://34.91.86.64:8083/auth/realms/myrealm"
