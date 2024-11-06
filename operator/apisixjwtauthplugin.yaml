@@ -1,0 +1,21 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined
+  namespace: ingress-apisix
+spec:
+  plugins:
+    - name: limit-req
+      enable: true
+      config:
+        rate: 5
+        burst: 0
+        nodelay: true
+        key: "remote_addr"
+    - name: jwt-auth
+      enable: true
+      config:
+          key: iss
+          public_key: "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA9v0alOlorEC2NZqyhkRBVrcXBLKzxcR8YhTVtVt2qRnR7L1sCG4lVSEN0F3fGxk5k7AKAs0YLR3TdOc2KAybWvotUngF0EyiDo+bhr2e3Ax8YzZVQh1wyPb0xYpnP1z/I8SEPazAvNoBOkaVbYyWF5fl82lo4JavUBa/T/Vo+kshD5RjXEWR5FIFUmqNd2Pc5IYC/YP8q/9orvyORdGt2WHBrBYpr5usfURU6hW5p51N3hUEeZF/AxHq1Og6wOnzcy56mHObXxI15nudDWlcbf+2neKqcOw5ZWyzbJ3nRCtk3XARuTmVrsZwI/dtgojY9fStNsQGxP1fkPbosHInxwIDAQAB\n-----END PUBLIC KEY-----"
+          algorithm: RS256
+          secret: z0XuGx2Duf5Jomzne6PUujwNyIPL2vBI
