@@ -1,7 +1,7 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: jwt-auth
+  name: jwt
   namespace: components
 plugin: jwt
 config: 
