@@ -1,0 +1,19 @@
+{
+  "repo_url": "https://github.com/tmforum-oda/oda-canvas.git",
+  "branch": "main",
+
+  "env": {
+    "KEYCLOAK_USER": "adminUser",
+    "KEYCLOAK_PASSWORD": "adminPass",
+    "KEYCLOAK_BASE_URL": "http://keycloak-ip:8083/auth/",
+    "KEYCLOAK_REALM": "odari"
+  },
+  "mandatory": [
+    "UC002-F001-Install-Component.feature"
+  ],
+  "optional": [
+    "UC003-F001-Expose-APIs-Create-API-Resource.feature",
+    "UC003-F002-Expose-APIs-Publish-API-Resource-URL.feature",
+    "UC003-F003-Expose-APIs-Verify-API-implementation-is-ready.feature"
+  ]
+}
