@@ -16,4 +16,4 @@ spec:
       enable: true
       config:
         match_claims:
-          key: "testing-hardcoded-value"
+          key: "testing-hardcoded-values"
