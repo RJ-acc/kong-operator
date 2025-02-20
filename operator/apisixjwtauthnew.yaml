@@ -15,5 +15,5 @@ spec:
     - name: jwt-auth
       enable: true
       config:
-        consumer_by:
-          - key
+        match_claims:
+          key: "testing-hardcoded-value"
