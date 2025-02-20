@@ -16,4 +16,4 @@ spec:
       enable: true
       config:
         match_claims:
-          key: "testing-hardcoded-values"
+          key: "pc1 pc2 pc3"
