@@ -1,0 +1,9 @@
+<CORS enabled="True" name="CORS">
+    <AllowOrigins>https://allowed-origin.com, https://allowed-origin2.com</AllowOrigins>
+    <AllowCredentials>False</AllowCredentials>
+    <HandlePreflightRequests enabled="False">
+       <AllowHeaders>Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers</AllowHeaders>
+       <AllowMethods>GET, POST</AllowMethods>
+       <MaxAge>36000</MaxAge>
+    </HandlePreflightRequests>
+</CORS>
