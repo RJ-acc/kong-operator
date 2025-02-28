@@ -1,0 +1,6 @@
+<Quota async="false" continueOnError="false" enabled="true" name="Quota-Policy">
+  <DisplayName>Quota Policy</DisplayName>
+  <Allow count="{{ quota_count }}" />  
+  <Interval>{{ quota_interval }}</Interval>
+  <TimeUnit>{{ quota_timeunit }}</TimeUnit>
+</Quota>
