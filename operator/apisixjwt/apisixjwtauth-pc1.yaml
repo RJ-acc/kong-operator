@@ -1,0 +1,19 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined
+  namespace: ingress-apisix
+spec:
+  plugins:
+    - name: limit-req
+      enable: true
+      config:
+        rate: 5
+        burst: 0
+        nodelay: true
+        key: "remote_addr"
+    - name: jwt-auth
+      enable: true
+      config:
+        match_claims:
+          key: "pc1"
