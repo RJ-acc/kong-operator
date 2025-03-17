@@ -16,4 +16,4 @@ spec:
       enable: true
       config:
         match_claims:
-          key: "pc1 pc2 pc3"
+          key: "pc1 pc2 pc3 pc4"
