@@ -10,9 +10,9 @@ spec:
       config:
         client_id: "apisixuser"
         client_secret: "YNMcz1LQl0EbeEEYPUgJS2otAwddpxUw"
-        discovery: "http://34.90.20.67:8083/auth/realms/myrealm/.well-known/openid-configuration"
+        discovery: "http://34.90.20.67:8083/auth/realms/odari/.well-known/openid-configuration"
         bearer_only: true
         realm: "odari"
-        introspection_endpoint: "http://34.90.20.67:8083/auth/realms/myrealm/protocol/openid-connect/token/introspect"
-        token_endpoint: "http://34.90.20.67:8083/auth/realms/myrealm/protocol/openid-connect/token"
+        introspection_endpoint: "http://34.90.20.67:8083/auth/realms/odari/protocol/openid-connect/token/introspect"
+        token_endpoint: "http://34.90.20.67:8083/auth/realms/odari/protocol/openid-connect/token"
         scope: "openid profile email"
