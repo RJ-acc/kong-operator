@@ -1,0 +1,142 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Aiva Orchestrator API",
+    "description": "## Aiva Orchestrator API Reference.This API allows initiating a conversation and retrieving a response, including suggested queries and sources.",
+    "version": "1.0.0"
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "schemes": ["http","https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/conversation": {
+      "post": {
+        "summary": "Initiate a conversation",
+        "description": "This endpoint allows the user to initiate a conversation by sending a query, thread_id, and username. Returns a response with the answer, sources, suggested queries, and tool used.",
+        "tags": ["Conversation"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Conversation payload",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "required": ["query", "thread_id", "username"],
+              "properties": {
+                "query": {
+                  "type": "string",
+                  "example": "What is autonomous network?"
+                },
+                "thread_id": {
+                  "type": "string",
+                  "example": "6366"
+                },
+                "username": {
+                  "type": "string",
+                  "example": "test_user"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful conversation response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "multiturn_query": {
+                  "type": "string"
+                },
+                "query": {
+                  "type": "string"
+                },
+                "response": {
+                  "type": "object",
+                  "properties": {
+                    "answer": { "type": "string" },
+                    "query": { "type": "string" },
+                    "sources": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "citation": { "type": "string" },
+                          "content": { "type": "string" },
+                          "source": { "type": "string" },
+                          "title": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                },
+                "suggested_query": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "tool_used": {
+                  "type": "string"
+                }
+              },
+              "example": {
+                "multiturn_query": "Would you like to know more?",
+                "query": "What is autonomous network?",
+                "response": {
+                  "answer": "An autonomous network is a self-managing network that uses automation to optimize performance.",
+                  "query": "What is autonomous network?",
+                  "sources": [
+                    {
+                      "citation": "Source 1",
+                      "content": "Autonomous networks automatically optimize and self-manage network operations.",
+                      "source": "Network Documentation",
+                      "title": "Introduction to Autonomous Networks"
+                    }
+                  ]
+                },
+                "suggested_query": [
+                  "How does autonomous network work?",
+                  "What are the benefits of autonomous networks?"
+                ],
+                "tool_used": "handle_conversation"
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request  Query is empty or missing required parameters",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": { "type": "string" }
+              },
+              "example": {
+                "error": "Query cannot be empty"
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error  An unexpected error occurred",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": { "type": "string" }
+              },
+              "example": {
+                "error": "An error occurred while processing the request"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Conversation",
+      "description": "Operations related to conversation handling"
+    }
+  ]
+}
+
