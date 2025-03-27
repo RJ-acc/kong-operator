@@ -16,3 +16,4 @@ spec:
         introspection_endpoint: "http://34.90.20.67:8083/auth/realms/odari/protocol/openid-connect/token/introspect"
         token_endpoint: "http://34.90.20.67:8083/auth/realms/odari/protocol/openid-connect/token"
         scope: "openid profile email"
+        introspection_interval: 300
