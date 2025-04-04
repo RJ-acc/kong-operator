@@ -9,7 +9,7 @@ spec:
       enable: true
       config:
         client_id: "apisixuser"
-        client_secret: "YNMcz1LQl0EbeEEYPUgJS2otAwddpxUw"
+        client_secret: "zCyhot1Ay5cnd171gp1clkCT5tc6djA9"
         discovery: "http://35.204.250.56:8083/auth/realms/odari/.well-known/openid-configuration"
         bearer_only: true
         realm: "odari"
