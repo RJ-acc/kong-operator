@@ -9,11 +9,11 @@ spec:
       enable: true
       config:
         client_id: "apisixuser"
-        client_secret: "zCyhot1Ay5cnd171gp1clkCT5tc6djA9"
-        discovery: "http://35.204.250.56:8083/auth/realms/odari/.well-known/openid-configuration"
+        client_secret: "5VH17V8FT1hrqbZNPPNO1GVKX3dHdolq"
+        discovery: "http://35.204.191.84:8083/auth/realms/odari/.well-known/openid-configuration"
         bearer_only: true
         realm: "odari"
-        introspection_endpoint: "http://35.204.250.56:8083/auth/realms/odari/protocol/openid-connect/token/introspect"
-        token_endpoint: "http://35.204.250.56:8083/auth/realms/odari/protocol/openid-connect/token"
+        introspection_endpoint: "http://35.204.191.84:8083/auth/realms/odari/protocol/openid-connect/token/introspect"
+        token_endpoint: "http://35.204.191.84:8083/auth/realms/odari/protocol/openid-connect/token"
         scope: "openid profile email"
         introspection_interval: 300
