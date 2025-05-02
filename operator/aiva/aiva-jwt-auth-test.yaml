@@ -26,3 +26,5 @@ spec:
         key_type:      "var"
         key:           "$jwt_payload_clientId"
         rejected_code: 429
+    - name: prometheus
+      enable: true
