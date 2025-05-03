@@ -21,10 +21,12 @@ spec:
     - name: limit-count
       enable: true
       config:
-        count:         1
-        time_window:   60
-        key_type:      "var"
-        key:           "$jwt_payload_clientId"
+        count: 2
+        time_window: 60
+        key_type: var
+        key: jwt_claim_clientId 
         rejected_code: 429
+        show_limit_quota_header: true
+        policy: local
     - name: prometheus
       enable: true
