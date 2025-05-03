@@ -8,9 +8,16 @@ spec:
     - name: jwt-auth
       enable: true
       config:
-        pub_key: |-
+        algorithm: RS256
+        public_key: |-
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxeaQ7FZcvt10R86SibCd6crRmus4KgmrB5smyTDmbI7q2/VC6F/Gb520DFWdcixFOTFTkWCFK0rjkpov8sFgVvEQp2wBSpEp9GXB4Ct3ioVODsPCcQlzjY8C1UyOx5becAHvY/BgS6gkmByeI0710tR3KJDgTQxJWyHl41FDNlGtmrAnxrtAzFan4Yo/xWzBVDwtkL+JRRM1D9a2eSAcX3pRMsZh+2CYDNTBfMmx2FLx8GHQE8k17mKznwQOvk93gOVKqamt9Ccmmhmc/7LRts/Oh0Nu/LyV+v9cux6C1EEAKf+wumgzZFfEOj2YmKkIr11KB0IpFkUbRSWn2rSEdwIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxeaQ7FZcvt10R86SibCd
+          6crRmus4KgmrB5smyTDmbI7q2/VC6F/Gb520DFWdcixFOTFTkWCFK0rjkpov8sFg
+          VvEQp2wBSpEp9GXB4Ct3ioVODsPCcQlzjY8C1UyOx5becAHvY/BgS6gkmByeI071
+          0tR3KJDgTQxJWyHl41FDNlGtmrAnxrtAzFan4Yo/xWzBVDwtkL+JRRM1D9a2eSAc
+          X3pRMsZh+2CYDNTBfMmx2FLx8GHQE8k17mKznwQOvk93gOVKqamt9Ccmmhmc/7LR
+          ts/Oh0Nu/LyV+v9cux6C1EEAKf+wumgzZFfEOj2YmKkIr11KB0IpFkUbRSWn2rSE
+          dwIDAQAB
           -----END PUBLIC KEY-----
     - name: limit-count
       enable: true
