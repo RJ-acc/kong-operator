@@ -23,8 +23,8 @@ spec:
       config:
         count: 2
         time_window: 60
-        key_type: var
-        key: jwt_payload_clientId
+        key_type: "var"
+        key: "$jwt_payload_clientId"
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
