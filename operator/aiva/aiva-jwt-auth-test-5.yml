@@ -11,13 +11,7 @@ spec:
         algorithm: RS256
         pub_key: |-
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ZexrK4q52/r6zNiW1+
-          MhlQAUzGay4hHb37UrP76gOiuBKUQ5+3RvAJNH1qadVwmNTNon3k4JwZT0ExQGOB
-          BKDpOR3DcppbTMOQ48x1jzX5n6ZHrqU4H7iS0KlWKqo28PEHvTx3irpbJuYil3n9
-          K03EP7BnFR/WZSeP3P6jQxqZaCk7VUV1T35rNXF0pinOghmf4b7juX/J617izFp8
-          XZCu6tbS1nK8AQ/lGJBjZLaKOVtU0GJdgxRmKQXIPokd3p1QspsF69YiCIzmmmWv
-          fqFkHkZBB/Q4AISE6zQtSsQ+y3IWqdIcPNe1xLCODKYrt58oLBG9w8u0oZ/GcHmN
-          wgQIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkiT/IX9mfp6tlugY2w2/Z3pEGc+gu91T6Q+f9L0RaRmK8fWJRCeM6xPAX86eSb+ezG73L+aI8ulL0o6qpzkDTYqWhGbQSUIPIj/4j+L7wr/YxLLz0EyjO7Ktx3qUw5IhtSCIQxuDj2hLVJ8c5l3nwpXK9pP+z+Dq31nzC1QK8PH5vep7gzF3lztC67wVn0aVkemWoO4u52wL8KwuyOLcZgvse2WAjQ1tmupUyz+chK0P0Bd9cCrHKN3www1XKU8PmKUQW046pAO1igoX0UNMLgGbYXTKEeQn7jbcsjS/ox+vEsCNK8/XEyITQoa3ofh3U7JZA6Oe/s/9hFGm6l4WcQIDAQAB
           -----END PUBLIC KEY-----
     - name: limit-count
       enable: true
