@@ -8,23 +8,23 @@ spec:
     - name: jwt-auth
       enable: true
       config:
-        pub_key: |-
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA1ZexrK4q52/r6zNiW1+
-          MhlQAUzGay4hHb37UrP76gOiuBKUQ5+3RvAJNH1qadVwmNTNon3k4JwZT0ExQGOB
-          BKDpOR3DcppbTMOQ48x1jzX5n6ZHrqU4H7iS0KlWKqo28PEHvTx3irpbJuYil3n9
-          K03EP7BnFR/WZSeP3P6jQxqZaCk7VUV1T35rNXF0pinOghmf4b7juX/J617izFp8
-          XZCu6tbS1nK8AQ/lGJBjZLaKOVtU0GJdgxRmKQXIPokd3p1QspsF69YiCIzmmmWv
-          fqFkHkZBB/Q4AISE6zQtSsQ+y3IWqdIcPNe1xLCODKYrt58oLBG9w8u0oZ/GcHmN
-          wgQIDAQAB
-          -----END PUBLIC KEY-----
+        jwks_uri: http://34.57.216.142:8083/auth/realms/odari/protocol/openid-connect/certs
+        algorithm: RS256
     - name: limit-count
       enable: true
       config:
         count: 2
         time_window: 60
-        key_type: "var"
-        key: "jwt_payload_clientId"
+        key_type: var
+        key: jwt_claim_clientId
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
+    - name: echo           # ← delete or disable after you’ve confirmed values
+      enable: true
+      config:
+        before_body:
+          - "azp = $jwt_claim_azp"
+          - "clientId = $jwt_claim_clientId"
+    - name: prometheus
+      enable: true
