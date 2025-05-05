@@ -9,7 +9,5 @@ spec:
       enable: true
       config:
         algorithm: RS256
-        pub_key: |-
-          -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkiT/IX9mfp6tlugY2w2/Z3pEGc+gu91T6Q+f9L0RaRmK8fWJRCeM6xPAX86eSb+ezG73L+aI8ulL0o6qpzkDTYqWhGbQSUIPIj/4j+L7wr/YxLLz0EyjO7Ktx3qUw5IhtSCIQxuDj2hLVJ8c5l3nwpXK9pP+z+Dq31nzC1QK8PH5vep7gzF3lztC67wVn0aVkemWoO4u52wL8KwuyOLcZgvse2WAjQ1tmupUyz+chK0P0Bd9cCrHKN3www1XKU8PmKUQW046pAO1igoX0UNMLgGbYXTKEeQn7jbcsjS/ox+vEsCNK8/XEyITQoa3ofh3U7JZA6Oe/s/9hFGm6l4WcQIDAQAB
-          -----END PUBLIC KEY-----
+        jwks_uri: http://34.57.216.142:8083/auth/realms/odari/protocol/openid-connect/certs
+        cache_ttl: 300
