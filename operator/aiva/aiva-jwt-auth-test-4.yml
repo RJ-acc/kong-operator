@@ -5,25 +5,19 @@ metadata:
   namespace: istio-ingress
 spec:
   plugins:
-    - name: jwt-auth
-      enable: true
-      config:
-        algorithm: RS256
-        jwks_uri: http://34.57.216.142:8083/auth/realms/odari/protocol/openid-connect/certs
-        # issuer and audience are optional; add if you want extra checks
-        issuer: http://34.57.216.142:8083/auth/realms/odari
-        # audience: account
     - name: limit-count
       enable: true
       config:
         count: 2
         time_window: 60
         key_type: var
-        key: jwt_claim_clientId   # or jwt_claim_azp
+        key: jwt_claim_clientId
         rejected_code: 429
-    - name: echo     # remove after test
+        show_limit_quota_header: true
+        policy: local
+    - name: echo           # ← delete or disable after  confirmed values
       enable: true
       config:
-        before_body:
-          - "azp = $jwt_claim_azp"
-          - "clientId = $jwt_claim_clientId"
+        before_body: |-
+          azp = $jwt_claim_azp
+          clientId = $jwt_claim_clientId
