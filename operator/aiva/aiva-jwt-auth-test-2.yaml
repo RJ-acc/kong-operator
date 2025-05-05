@@ -11,13 +11,13 @@ spec:
         algorithm: RS256
         public_key: |-
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxeaQ7FZcvt10R86SibCd
-          6crRmus4KgmrB5smyTDmbI7q2/VC6F/Gb520DFWdcixFOTFTkWCFK0rjkpov8sFg
-          VvEQp2wBSpEp9GXB4Ct3ioVODsPCcQlzjY8C1UyOx5becAHvY/BgS6gkmByeI071
-          0tR3KJDgTQxJWyHl41FDNlGtmrAnxrtAzFan4Yo/xWzBVDwtkL+JRRM1D9a2eSAc
-          X3pRMsZh+2CYDNTBfMmx2FLx8GHQE8k17mKznwQOvk93gOVKqamt9Ccmmhmc/7LR
-          ts/Oh0Nu/LyV+v9cux6C1EEAKf+wumgzZFfEOj2YmKkIr11KB0IpFkUbRSWn2rSE
-          dwIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkiT/IX9mfp6tlugY2w2/
+          Z3pEGc+gu91T6Q+f9L0RaRmK8fWJRCeM6xPAX86eSb+ezG73L+aI8ulL0o6qpzkD
+          TYqWhGbQSUIPIj/4j+L7wr/YxLLz0EyjO7Ktx3qUw5IhtSCIQxuDj2hLVJ8c5l3n
+          wpXK9pP+z+Dq31nzC1QK8PH5vep7gzF3lztC67wVn0aVkemWoO4u52wL8KwuyOLc
+          Zgvse2WAjQ1tmupUyz+chK0P0Bd9cCrHKN3www1XKU8PmKUQW046pAO1igoX0UNM
+          LgGbYXTKEeQn7jbcsjS/ox+vEsCNK8/XEyITQoa3ofh3U7JZA6Oe/s/9hFGm6l4W
+          cQIDAQAB
           -----END PUBLIC KEY-----
     - name: limit-count
       enable: true
@@ -25,7 +25,7 @@ spec:
         count: 2
         time_window: 60
         key_type: var
-        key: jwt_claim_azp 
+        key: jwt_claim_azp
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
