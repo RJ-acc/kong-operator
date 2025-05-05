@@ -20,7 +20,7 @@ spec:
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
-    - name: echo           # ← delete or disable after you’ve confirmed values
+    - name: echo           # ← delete or disable after  confirmed values
       enable: true
       config:
         before_body:
