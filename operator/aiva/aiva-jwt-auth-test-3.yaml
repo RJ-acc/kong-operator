@@ -8,8 +8,9 @@ spec:
     - name: jwt-auth
       enable: true
       config:
-        jwks_uri: http://34.57.216.142:8083/auth/realms/odari/protocol/openid-connect/certs
         algorithm: RS256
+        jwks_uri: http://34.57.216.142:8083/auth/realms/odari/protocol/openid-connect/certs
+        issuer: http://34.57.216.142:8083/auth/realms/odari
     - name: limit-count
       enable: true
       config:
