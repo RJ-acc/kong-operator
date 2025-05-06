@@ -1,0 +1,24 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined-apisixpluginconfig-aiva-orchestration-summary
+  namespace: istio-ingress
+spec:
+  plugins:
+    - name: jwt-auth
+      enable: true
+      config:
+        pub_key: |-
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApUFDrjNFysIgnN/6oNW8GyEQ5l2H1FKYQXn9IWrRxdjqkdkgZ62wEByVl8P/UqJ7nOl0jjJpOeKVglS3NY/03/7Oo3yQhqt/3u+2Hv0pdFBOo1sXlhY5BGZ6miVM4RZ7A7Ia7m0BI7kjsXaueTKG3dAgTHmpeDE2rgjVVSewwNFCzEPL8oja8bQiwlBwsWgfTrmZvGNA7YSqLTUoYlcmsg1EPVOO8ugRAv8vauGZPEzxBFFMlAVb6IBxnx85zzyHVHC3lVOYaE2XIVqixkeOi2OtZM9dCsaDBDBYN0xEnu8bzJBL2z7B0Y+ktHqnwA5g6BvNLg3Nw0itbfSD44eKqQIDAQAB
+          -----END PUBLIC KEY-----
+    - name: limit-count
+      enable: true
+      config:
+        count: 2
+        time_window: 60
+        key_type: var
+        key: jwt_payload_client_id
+        rejected_code: 429
+        show_limit_quota_header: true
+        policy: local
