@@ -18,7 +18,7 @@ spec:
         count: 2
         time_window: 60
         key_type: var
-        key: consumer_name
+        key: jwt_payload_client_id
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
