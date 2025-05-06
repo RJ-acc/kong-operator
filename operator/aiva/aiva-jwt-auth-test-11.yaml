@@ -16,7 +16,7 @@ spec:
       enable: true
       config:
         count: 2
-        time_window: 60
+        time_window:30
         key_type: var
         key: consumer_name
         rejected_code: 429
