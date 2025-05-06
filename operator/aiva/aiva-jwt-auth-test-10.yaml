@@ -12,3 +12,9 @@ spec:
           -----BEGIN PUBLIC KEY-----
           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApUFDrjNFysIgnN/6oNW8GyEQ5l2H1FKYQXn9IWrRxdjqkdkgZ62wEByVl8P/UqJ7nOl0jjJpOeKVglS3NY/03/7Oo3yQhqt/3u+2Hv0pdFBOo1sXlhY5BGZ6miVM4RZ7A7Ia7m0BI7kjsXaueTKG3dAgTHmpeDE2rgjVVSewwNFCzEPL8oja8bQiwlBwsWgfTrmZvGNA7YSqLTUoYlcmsg1EPVOO8ugRAv8vauGZPEzxBFFMlAVb6IBxnx85zzyHVHC3lVOYaE2XIVqixkeOi2OtZM9dCsaDBDBYN0xEnu8bzJBL2z7B0Y+ktHqnwA5g6BvNLg3Nw0itbfSD44eKqQIDAQAB
           -----END PUBLIC KEY-----
+    - name: echo           # ← delete or disable after  confirmed values
+      enable: true
+      config:
+        before_body: |-
+          azp = $jwt_claim_azp
+          clientId = $jwt_claim_clientId
