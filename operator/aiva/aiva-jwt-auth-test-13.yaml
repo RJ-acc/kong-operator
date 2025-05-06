@@ -1,0 +1,24 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined-apisixpluginconfig-aiva-orchestration-summary
+  namespace: istio-ingress
+spec:
+  plugins:
+    - name: jwt-auth
+      enable: true
+      config:
+        secret_ref:
+          name: jwt-public-key
+          key: public.key
+    - name: limit-count
+      enable: true
+      config:
+        count: 2
+        time_window: 60
+        key_type: var
+        key: consumer_name
+        rejected_code: 429
+        show_limit_quota_header: true
+        policy: local
+        rejected_msg: "Rate‑limit exceeded for this client. Please contact TMF AIVA team to increase limit"
