@@ -21,3 +21,10 @@ spec:
         after_body: "\n–– end of JWT claims ––"
         headers:
           X-Debug: "true"
+    - name: response-rewrite
+      enable: true
+      config:
+        headers:
+          set:
+            X-Azp: "$jwt_claim_azp"
+            X-Client-Id: "$jwt_claim_clientId"
