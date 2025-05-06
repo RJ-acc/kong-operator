@@ -21,3 +21,4 @@ spec:
         rejected_code: 429
         show_limit_quota_header: true
         policy: local
+        rejected_msg: "Rate‑limit exceeded for this client. Please contact TMF AIVA team to increase limit"
