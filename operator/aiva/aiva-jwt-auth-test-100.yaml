@@ -1,0 +1,30 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined-apisixpluginconfig-aiva-orchestration-summary
+  namespace: istio-ingress
+spec:
+  plugins:
+    - name: jwt-auth
+      enable: true
+      config:
+        pub_key: |-
+          -----BEGIN PUBLIC KEY-----
+          LS0tLS1CRUdJTiBQVUJMSUMgS0VZLS0tLS0KTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGQUFPQ0FROEFNSUlCQ2dLQ0FRRUFuSUJLdW8rZjhScTBnWmtSYXcyeAo5L1lFOFRRWGZOQi91TVBBdGRaQ0dsNnpxYktSSGpXcmtsbUYzVzBSK2o5VkdZK2RPcEIxeVpKREpMUFpVRjBtClV5ZW4vSVJCTzlvSk9ETlZhNmp6QlB2TXhkamd1RGZ5K3dCczNoWHkzUkgveGZmZ2hkYS91Zy9uNXgwclgvSDgKSHVPUWN1czBYcTJqN2RVN2YrWldoRDVuR2ZocW9lc3B1K1A2alM5aVBtTFpZd1ljVk13VzZ4M0pWR1hDTlFnKwpscDJ4WjJ3RzkzeEhHcXNMK01EWWl6aWlvMmU3bXYvZlk5UEhmYTZrMU5IbytjZTZxY0t4dWhVdUU3MXV5bTRZCk1IU2E3VVhzWFY4U2Iza2R5cDh6NDVGdzIxdmNQaS9GdzdESWpOa0h4TWVZUWlSZWRZNjd4OC9CcDBGRVFkRlgKSVFJREFRQUIKLS0tLS1FTkQgUFVCTElDIEtFWS0tLS0tCg==
+          -----END PUBLIC KEY-----
+    - name: limit-count
+      enable: true
+      config:
+        count: 2
+        time_window: 60
+        key_type: var
+        key: consumer_name
+        rejected_code: 429
+        show_limit_quota_header: true
+        policy: local
+        rejected_msg: "Rate‑limit exceeded for this client. Please contact TMF AIVA team to increase limit"
+    - name: proxy-rewrite
+      enable: true
+      config:
+        headers:
+          X-Client-Id: "$consumer_name"
