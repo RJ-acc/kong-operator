@@ -10,12 +10,12 @@ spec:
       config:
         pub_key: |-
           -----BEGIN PUBLIC KEY-----
-          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnIBKuo+f8Rq0gZkRaw2x9/YE8TQXfNB/uMPAtdZCGl6zqbKRHjWrklmF3W0R+j9VGY+dOpB1yZJDJLPZUF0mUyen/IRBO9oJODNVa6jzBPvMxdjguDfy+wBs3hXy3RH/xffghda/ug/n5x0rX/H8HuOQcus0Xq2j7dU7f+ZWhD5nGfhqoespu+P6jS9iPmLZYwYcVMwW6x3JVGXCNQg+lp2xZ2wG93xHGqsL+MDYiziio2e7mv/fY9PHfa6k1NHo+ce6qcKxuhUuE71uym4YMHSa7UXsXV8Sb3kdyp8z45Fw21vcPi/Fw7DIjNkHxMeYQiRedY67x8/Bp0FEQdFXIQIDAQAB
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA/ECNEWhK87kQfq1xYm7SFVgM7tLYTuk4HVZAxxJv83JvL1uBkRVG6oNkCsSh2PX619A8Jj4CuBLqdBnNVCbMQFoOZFxtqBy8gEMMBo+KkJ3Nhc/6MKC9EsNbstpw8Y//pmhJ4VpgRzddbOhCZtpFnpJRRoM+7jcDsGR+NlgOTmCKseNJksH7VpKC8uFZDzp5KNe2SKiu8KhAMB9wnIGqZ67tnM9kS1+rBj7eizKmjzSr/nwo5EKF70KsW6gFujhREKd5Kc1brO4b/E1yS0LupgPtE12TnMBdUZejRtwlfT70lSdp4FLE68rNHXA2XvUiNnPircTmRscMZhp0YQl2OwIDAQAB
           -----END PUBLIC KEY-----
     - name: limit-count
       enable: true
       config:
-        count: 2
+        count: 5
         time_window: 60
         key_type: var
         key: consumer_name
