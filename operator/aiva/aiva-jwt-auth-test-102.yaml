@@ -1,0 +1,38 @@
+apiVersion: apisix.apache.org/v2
+kind: ApisixPluginConfig
+metadata:
+  name: combined-apisixpluginconfig-aiva-orchestration-summary
+  namespace: istio-ingress
+spec:
+  plugins:
+    - name: jwt-auth
+      enable: true
+      config:
+        pub_key: |-
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA/ECNEWhK87kQfq1xYm7SFVgM7tLYTuk4HVZAxxJv83JvL1uBkRVG6oNkCsSh2PX619A8Jj4CuBLqdBnNVCbMQFoOZFxtqBy8gEMMBo+KkJ3Nhc/6MKC9EsNbstpw8Y//pmhJ4VpgRzddbOhCZtpFnpJRRoM+7jcDsGR+NlgOTmCKseNJksH7VpKC8uFZDzp5KNe2SKiu8KhAMB9wnIGqZ67tnM9kS1+rBj7eizKmjzSr/nwo5EKF70KsW6gFujhREKd5Kc1brO4b/E1yS0LupgPtE12TnMBdUZejRtwlfT70lSdp4FLE68rNHXA2XvUiNnPircTmRscMZhp0YQl2OwIDAQAB
+          -----END PUBLIC KEY-----
+    - name: limit-count
+      enable: true
+      config:
+        count: 5
+        time_window: 60
+        key_type: var
+        key: consumer_name
+        rejected_code: 429
+        show_limit_quota_header: true
+        policy: local
+        rejected_msg: "Rate‑limit exceeded for this client. Please contact TMF AIVA team to increase limit"
+    - name: proxy-rewrite
+      enable: true
+      config:
+        headers:
+          X-Client-Id: "$consumer_name"
+    - name: cors
+      enable: true
+      config:
+        allow_origins: "*"        #  UI origin
+        allow_methods: "*"
+        allow_headers: "*"
+        allow_credentials: true                      # browser can send cookies / Auth header
+        max_age: 3600  
