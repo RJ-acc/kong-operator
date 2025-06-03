@@ -1,0 +1,43 @@
+component:
+  id: TMFC0645
+  name: servicequalification
+  functionalBlock: Production
+  publicationDate: 2025-05-17T00:00:00.000Z
+  version: "0.0.1"
+  storageClassName: default
+  apipolicy:
+    apiKeyVerification:
+      enabled: false
+      location: "header"
+    rateLimit:
+      enabled: false
+      identifier: "IP"
+      limit: "6"
+      interval: "pm"
+    quota:
+      identifier: ""
+      limit: ""
+    OASValidation:
+      requestEnabled: false
+      responseEnabled: false
+      allowUnspecifiedHeaders: false
+      allowUnspecifiedQueryParams: false
+      allowUnspecifiedCookies: false
+    CORS:
+      enabled: false
+      allowCredentials: false
+      allowOrigins: "https://allowed-origin.com, https://allowed-origin2.com"    
+      handlePreflightRequests:
+        enabled: false
+        allowHeaders: "Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers"
+        allowMethods: "GET, POST"
+        maxAge: 36000
+    template: "https://raw.githubusercontent.com/nbn/canvas/refs/heads/main/apigateway_policies.yaml"
+  dependentAPIs:
+    enabled: false
+    rejectUnauthorizedCertificates: false
+security:
+  canvasSystemRole: Admin
+api:
+  image: nbn/component:0.23
+  versionLabel: servicequalification-0.21
