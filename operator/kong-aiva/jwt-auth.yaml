@@ -12,3 +12,15 @@ config:
   - exp
   key_claim_name: key
   secret_is_base64: false
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: rate-limit-2-min
+  annotations:
+    kubernetes.io/ingress.class: kong
+config:
+  minute: 2
+  policy: local
+plugin: rate-limiting
+---
