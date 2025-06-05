@@ -16,12 +16,11 @@ config:
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: req-transform-client-id  # new name
+  name: req-transform-client-id
   annotations:
     kubernetes.io/ingress.class: kong
 plugin: request-transformer
 config:
   add:
     headers:
-    - "X-Consumer-Username:$(headers.x-consumer-username)"
-    - "X-Consumer-Id:$(headers.x-consumer-id)"
+      - "X-Client-Id:$(headers.x-consumer-username)"
