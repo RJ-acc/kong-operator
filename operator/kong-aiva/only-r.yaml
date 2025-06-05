@@ -23,4 +23,5 @@ plugin: request-transformer
 config:
   add:
     headers:
-    - X-Client-Id:$(headers.x-consumer-username)
+    - "X-Consumer-Username:$(headers.x-consumer-username)"
+    - "X-Consumer-Id:$(headers.x-consumer-id)"
