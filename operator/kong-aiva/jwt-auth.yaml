@@ -23,7 +23,7 @@ plugin: request-transformer
 config:
   add:
     headers:
-    - "X-Client-Id:$consumer"
+    - "X-Client-Id:$(headers.x-consumer-username)"
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
