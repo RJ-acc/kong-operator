@@ -24,3 +24,28 @@ config:
   policy: local
 plugin: rate-limiting
 ---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: cors-open
+  annotations:
+    kubernetes.io/ingress.class: kong
+plugin: cors
+config:
+  origins: "*"          # allow_origins
+  methods: ["*"]        # allow_methods
+  headers: ["*"]        # allow_headers
+  credentials: true     # allow_credentials
+  max_age: 3600
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: req-transform-client-id  # new name
+  annotations:
+    kubernetes.io/ingress.class: kong
+plugin: request-transformer
+config:
+  add:
+    headers:
+    - "X-Client-Id:$consumer.username"
