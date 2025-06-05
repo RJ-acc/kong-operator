@@ -64,4 +64,4 @@ plugin: request-transformer
 config:
   add:
     headers:
-    - "X-Client-Id:$consumer_name"
+    - "X-Client-Id:$http_x_consumer_username"
