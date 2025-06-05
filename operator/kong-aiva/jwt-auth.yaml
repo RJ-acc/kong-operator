@@ -32,11 +32,25 @@ metadata:
     kubernetes.io/ingress.class: kong
 plugin: cors
 config:
-  origins: "*"          # allow_origins
-  methods: ["*"]        # allow_methods
-  headers: ["*"]        # allow_headers
-  credentials: true     # allow_credentials
-  max_age: 3600
+  # Allow any origin
+  origins:
+    - "*"                    # must be an array, even for a single item
+  methods:
+    - GET
+    - HEAD
+    - POST
+    - PUT
+    - PATCH
+    - DELETE
+    - OPTIONS
+    - TRACE
+    - CONNECT
+  headers:
+    - "*"
+  exposed_headers:
+    - "*"
+  credentials: true          # browsers may send cookies / Authorization
+  max_age: 3600              # seconds browsers may cache the pre-flight
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
