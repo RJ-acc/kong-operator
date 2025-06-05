@@ -1,62 +1,6 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: jwt
-plugin: jwt
-config: 
-  uri_param_names:
-  - jwt
-  cookie_names:
-  - token
-  claims_to_verify:
-  - exp
-  key_claim_name: key
-  secret_is_base64: false
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: rate-limit-2-min
-  annotations:
-    kubernetes.io/ingress.class: kong
-config:
-  minute: 3                    
-  limit_by: consumer             
-  policy: local    
-  error_message: API rate limit exceeded,check with Team
-plugin: rate-limiting
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: cors-open
-  annotations:
-    kubernetes.io/ingress.class: kong
-plugin: cors
-config:
-  # Allow any origin
-  origins:
-    - "*"                    # must be an array, even for a single item
-  methods:
-    - GET
-    - HEAD
-    - POST
-    - PUT
-    - PATCH
-    - DELETE
-    - OPTIONS
-    - TRACE
-    - CONNECT
-  headers:
-    - "*"
-  exposed_headers:
-    - "*"
-  credentials: true          # browsers may send cookies / Authorization
-  max_age: 3600              # seconds browsers may cache the pre-flight
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
   name: req-transform-client-id  # new name
   annotations:
     kubernetes.io/ingress.class: kong
