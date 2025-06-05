@@ -32,7 +32,7 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: kong
 config:
-  minute: 2                    
+  minute: 3                    
   limit_by: consumer             
   policy: local    
   error_message: API rate limit exceeded,check with Team
