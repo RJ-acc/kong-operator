@@ -1,8 +1,7 @@
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: jwt-auth
-  namespace: istio-ingress
+  name: jwt
 plugin: jwt
 config: 
   uri_param_names:
