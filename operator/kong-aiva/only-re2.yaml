@@ -1,3 +1,18 @@
+apiVersion: configuration.konghq.com/v1Add commentMore actions
+kind: KongPlugin
+metadata:
+  name: jwt
+plugin: jwt
+config: 
+  uri_param_names:
+  - jwt
+  cookie_names:
+  - token
+  claims_to_verify:
+  - exp
+  key_claim_name: key
+  secret_is_base64: false
+---
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
