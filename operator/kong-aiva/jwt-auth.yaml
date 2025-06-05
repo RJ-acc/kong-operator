@@ -16,6 +16,18 @@ config:
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
+  name: req-transform-client-id  # new name
+  annotations:
+    kubernetes.io/ingress.class: kong
+plugin: request-transformer
+config:
+  add:
+    headers:
+    - "X-Client-Id:consumer"
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
   name: rate-limit-2-min
   annotations:
     kubernetes.io/ingress.class: kong
@@ -53,15 +65,4 @@ config:
     - "*"
   credentials: true          # browsers may send cookies / Authorization
   max_age: 3600              # seconds browsers may cache the pre-flight
----
-apiVersion: configuration.konghq.com/v1
-kind: KongPlugin
-metadata:
-  name: req-transform-client-id  # new name
-  annotations:
-    kubernetes.io/ingress.class: kong
-plugin: request-transformer
-config:
-  add:
-    headers:
-    - "X-Client-Id:consumer"
+
