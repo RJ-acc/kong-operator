@@ -1,4 +1,4 @@
-apiVersion: configuration.konghq.com/v1Add commentMore actions
+apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
   name: jwt
